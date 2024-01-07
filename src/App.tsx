@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CmsMantenimientoPage from './pages/CmsMantenimientoPage';
+import CmsTipoInmueblePage from './pages/CmsTipoInmueblePage';
+import CmsCaracteristicaPage from './pages/CmsCaracteristicaPage';
+import CmsCiudadPage from './pages/CmsCiudadPage';
+import CmsPropietarioPage from './pages/CmsPropietarioPage';
+import CmsInmueblePage from './pages/CmsInmueblePage';
+import LandingPage from './pages/LandingPage';
+import PageLogin from './pages/Login';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>      
+        <Routes>
+        <Route path="/cms/creaInmueble" element={<CmsInmueblePage />}/>          
+          <Route path="/cms/creaPropietario" element={<CmsPropietarioPage />}/>             
+          <Route path="/cms/creaCiudad" element={<CmsCiudadPage />}/>                
+          <Route path="/cms/creaCaracteristica" element={<CmsCaracteristicaPage />}/>       
+          <Route path="/cms/creaTipoInmueble" element={<CmsTipoInmueblePage />}/>   
+          <Route path="/cms/mantenimiento" element={<CmsMantenimientoPage />}/>   
+          <Route path="/landingpage" element={<LandingPage />}/>          
+          <Route path="/" element={<PageLogin />}/>
+        </Routes>              
+      </BrowserRouter>
     </div>
   );
 }

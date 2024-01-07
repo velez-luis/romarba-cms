@@ -1,0 +1,22 @@
+.open {
+    animation-name: open;
+    animation-duration: 3s;  
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes open {
+    from {hight: 0px;}
+    to   {hight: 24px;}
+  }
+
+  .close {
+    height: 0px;
+    animation-name: close;
+    animation-duration: 3s;  
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes close {
+    from {hight: 24px;}
+    to   {hight: 0px;}
+  }

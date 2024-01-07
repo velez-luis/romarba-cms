@@ -1,0 +1,77 @@
+
+.imgBarFondo {
+  background-image: url('../../assets/datoscontactofooter.png');
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center center;
+}
+
+.imgFondoBdy {
+  background-image: url('../../assets/fondobody.png');
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position: right;
+}
+
+.imgFondoCut {
+  background-image: url('../../assets/headerCut.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.bdyQuery {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.divContacto {
+
+  display: block;
+  width: 43%;
+  height: 365px;
+
+}
+
+.divComentarios {
+  display: block;
+  width: 57%;
+  height: 365px;
+
+}
+
+.divDatosContactosCel {
+  height: 40px;
+}
+
+.divDatosContactosDemas {
+  height: 38px;
+}
+
+.divContactosInternos {
+  width: 90%;
+}
+
+@media (max-width: 768px) {
+
+  .bdyQuery {
+    flex-direction: column;
+  }
+
+  .divContacto {
+
+    width: 100%;  
+
+  }
+
+  .divComentarios {
+
+    width: 100%;
+  
+  }  
+
+  .divContactosInternos {
+    width: 100%;
+  }
+
+}

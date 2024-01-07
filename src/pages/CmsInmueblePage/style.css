@@ -1,0 +1,74 @@
+
+.imgFondoCut {
+  background-image: url('../../assets/headerCut.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.divContent{
+  height: 340px;
+}
+
+.divForm{
+  width: 40%;
+}
+
+.divCarusel{
+
+  width: 60%;
+
+}
+
+.divInterno{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+}
+
+.divFiles{
+  display: flex;
+  flex-direction: row;
+}
+
+.divCarcateristicas{
+  width: 35%;
+}
+
+.divFilesWidth{
+  width: 65%;
+}
+
+@media (max-width: 600px) {
+
+  .divInterno{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .divFiles{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .divCarcateristicas{
+    width: 100%;
+  }
+
+  .divFilesWidth{
+    width: 100%;
+  }
+
+  .divForm{
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .divCarusel{
+
+    width: 100%;
+  
+  }
+  
+
+}
