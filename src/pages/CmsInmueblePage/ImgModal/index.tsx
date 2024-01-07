@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import './style.css';
 import ImagesCarouselVisor from '../../../components/ImagesCarouselVisor';
 
-const ImgModal = (props: {Show: boolean, HandlerClick: any, ListImages: any}) => {
+const ImgModal = (props: {Show: boolean, HandlerClick: any, ListImages: any, index: number}) => {
 
 return (
       <div>
@@ -14,6 +14,7 @@ return (
             <Modal.Body>
                 <ImagesCarouselVisor 
                     listImages={props.ListImages}
+                    index={props.index}
                 />
             </Modal.Body>                
             <Modal.Footer>                                   

@@ -41,6 +41,8 @@ const Interno = () => {
     let [InsEdit, setInsEdit] = useState(0); 
     const [pending, setPending] = useState(true);
 
+    //******************************************************
+    // sección relacinada con la tabla o grilla de inmuebles
     const columnas = [
         {
             name: 'Código',
@@ -134,7 +136,65 @@ const Interno = () => {
               backgroundColor: '#D5D5D5',
             },
         }
-    ];    
+    ]; 
+    
+    const changeTextFiltro = (evnt: any) => {
+
+        let reg: never[] = [];
+
+        if (evnt.target.value.indexOf("+") !== -1){
+            let col: string = evnt.target.value.split("+")[0].trim().toUpperCase();
+            let val: string = evnt.target.value.split("+")[1];
+            val = val.trimStart();
+            console.log(col);
+            switch(col){
+                case 'CÓDIGO':
+                case 'CODIGO':
+                    reg = cpInmueble.filter( (dato: any) => dato.idInmueble && dato.idInmueble.toString().includes(val.toUpperCase()));
+                    break;
+                case 'PROPIETARIO':
+                    reg = cpInmueble.filter( (dato: any) => dato.nombresPropietario && dato.nombresPropietario.toUpperCase().includes(val.toUpperCase()));                    
+                    break;
+                case 'CIUDAD':
+                    reg = cpInmueble.filter( (dato: any) => dato.nombreCiudad && dato.nombreCiudad.toUpperCase().includes(val.toUpperCase()));                    
+                    break;
+                case 'BARRIO': 
+                    reg = cpInmueble.filter( (dato: any) => dato.nombreBarrio && dato.nombreBarrio.toUpperCase().includes(val.toUpperCase()));
+                    break;
+                case 'DESCRIPCIÓN':
+                case 'DESCRIPCION': 
+                    reg = cpInmueble.filter( (dato: any) => dato.descripcion && dato.descripcion.toUpperCase().includes(val.toUpperCase()));                
+                    break;
+                case 'DIRECCIÓN':
+                case 'DIRECCION': 
+                    reg = cpInmueble.filter( (dato: any) => dato.direccion && dato.direccion.toUpperCase().includes(val.toUpperCase()));
+                    break;                 
+                case 'TIPOLOGÍA':
+                case 'TIPOLOGIA': 
+                    reg = cpInmueble.filter( (dato: any) => dato.tipoInmueble && dato.tipoInmueble.toUpperCase().includes(val.toUpperCase()));
+                    break;                                               
+                default: 
+                    break;
+            }
+
+        }else{
+            reg = cpInmueble.filter((dato: any) => {
+                return (
+                    (dato.idInmueble && dato.idInmueble.toString().includes(evnt.target.value.toUpperCase())) || 
+                    (dato.nombresPropietario && dato.nombresPropietario.toUpperCase().includes(evnt.target.value.toUpperCase())) || 
+                    (dato.nombreCiudad && dato.nombreCiudad.toUpperCase().includes(evnt.target.value.toUpperCase())) ||
+                    (dato.nombreBarrio && dato.nombreBarrio.toUpperCase().includes(evnt.target.value.toUpperCase()))|| 
+                    (dato.descripcion && dato.descripcion.toUpperCase().includes(evnt.target.value.toUpperCase()))||                     
+                    (dato.direccion && dato.direccion.toUpperCase().includes(evnt.target.value.toUpperCase())) ||
+                    (dato.tipoInmueble && dato.tipoInmueble.toUpperCase().includes(evnt.target.value.toUpperCase()))
+                ) 
+            });             
+        }
+
+        setInmuebles([...reg]);             
+    }  
+    // fin sección 
+    // *****************************************************
 
     const handler = (e: any) => {
 
@@ -417,61 +477,11 @@ const Interno = () => {
                     Show={showImageLarge}
                     ListImages={filesList}
                     HandlerClick={()=>setShowImageLarge(false)}
+                    index={props.index}
                 />
             </div>
         )
     }
-
-    const changeTextFiltro = (evnt: any) => {
-
-        let reg: never[] = [];
-        console.log(evnt.target.value);
-        if (evnt.target.value.indexOf("+") !== -1){
-            let col = evnt.target.value.split("+")[0].trim();
-            let val = evnt.target.value.split("+")[1].trim();
-
-            switch(col){
-                case 'Código':
-                    reg = cpInmueble.filter( (dato: any) => dato.idInmueble && dato.idInmueble.toString().includes(val.toUpperCase()));
-                    break;
-                case 'Propietario':
-                    reg = cpInmueble.filter( (dato: any) => dato.nombresPropietario && dato.nombresPropietario.toUpperCase().includes(val.toUpperCase()));                    
-                    break;
-                case 'Ciudad':
-                    reg = cpInmueble.filter( (dato: any) => dato.nombreCiudad && dato.nombreCiudad.toUpperCase().includes(val.toUpperCase()));                    
-                    break;
-                case 'Barrio': 
-                    reg = cpInmueble.filter( (dato: any) => dato.nombreBarrio && dato.nombreBarrio.toUpperCase().includes(val.toUpperCase()));
-                    break;
-                case 'Descripción': 
-                    reg = cpInmueble.filter( (dato: any) => dato.descripcion && dato.descripcion.toUpperCase().includes(val.toUpperCase()));                
-                    break;
-                case 'Dirección': 
-                    reg = cpInmueble.filter( (dato: any) => dato.direccion && dato.direccion.toUpperCase().includes(val.toUpperCase()));
-                    break;                 
-                case 'Tipología': 
-                    reg = cpInmueble.filter( (dato: any) => dato.tipoInmueble && dato.tipoInmueble.toUpperCase().includes(val.toUpperCase()));
-                    break;                                               
-                default: 
-                    break;
-            }
-
-        }else{
-            reg = cpInmueble.filter((dato: any) => {
-                return (
-                    (dato.idInmueble && dato.idInmueble.toString().includes(evnt.target.value.toUpperCase())) || 
-                    (dato.nombresPropietario && dato.nombresPropietario.toUpperCase().includes(evnt.target.value.toUpperCase())) || 
-                    (dato.nombreCiudad && dato.nombreCiudad.toUpperCase().includes(evnt.target.value.toUpperCase())) ||
-                    (dato.nombreBarrio && dato.nombreBarrio.toUpperCase().includes(evnt.target.value.toUpperCase()))|| 
-                    (dato.descripcion && dato.descripcion.toUpperCase().includes(evnt.target.value.toUpperCase()))||                     
-                    (dato.direccion && dato.direccion.toUpperCase().includes(evnt.target.value.toUpperCase())) ||
-                    (dato.tipoInmueble && dato.tipoInmueble.toUpperCase().includes(evnt.target.value.toUpperCase()))
-                ) 
-            });             
-        }
-
-        setInmuebles([...reg]);             
-    }  
 
     useEffect(()=>{
 
@@ -698,7 +708,7 @@ const Interno = () => {
                                         </div>
                                         <div className=' text-wrap' style={{width: "75%"}}>{fl.name}</div>
                                         <div className='text-center'   style={{width: "20%", cursor: "pointer"}}>
-                                            <ImagePreview key={idx} file={fl} />                                                
+                                            <ImagePreview key={idx} file={fl} index={idx}/>                                                
                                         </div>
                                     </div> 
                                 )
@@ -719,8 +729,8 @@ const Interno = () => {
             <div className='ps-4 mt-4 pe-4'>
                 <div className="d-flex flex-column col col-lg-6 mt-1 mb-1">
                     <label className="m-1">Busqueda </label>
-                    <label className='fst-italic' style={{fontSize: "12px"}}>
-                        Sí quiere buscar por una columna específica, escriba el nombre de la columna, el símbolo +, seguido del dato a buscar. Ejem: Ciudad+dato a buscar, Barrio+dato a buscar 
+                    <label className='fst-italic ms-1 mb-2' style={{fontSize: "12px"}}>
+                        Sí quiere buscar por una columna específica, escriba el nombre de la columna, el símbolo +, seguido del dato a buscar. Ejem1: Ciudad+dato a buscar, Ejem2: Barrio+dato a buscar 
                     </label>
                     <input type="text" id="txtBuscar" className="form-control" onChange={changeTextFiltro} />
                 </div>                
@@ -736,7 +746,7 @@ const Interno = () => {
                     customStyles={customStyles}
                     conditionalRowStyles={conditionalRowStyles}    
                     progressPending={pending}
-                    progressComponent={<FadeLoader color="#FF7588" />}                
+                    progressComponent={<FadeLoader color="#FF7588" />}             
                 />
             </div>
         </div>

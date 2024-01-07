@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-function ImagesCarouselVisor(props: {listImages: any}) {
+function ImagesCarouselVisor(props: {listImages: any, index: number}) {
+
+  const [index, setIndex] = useState(props.index);
+
+  const handleSelect = (selectedIndex: any) => {
+    setIndex(selectedIndex);
+  };
+
   return (
-    <Carousel fade>
+    <Carousel activeIndex={index}  onSelect={handleSelect} >
         {
             props.listImages.map((file: any)=>
                     <Carousel.Item title={file.name}>                    

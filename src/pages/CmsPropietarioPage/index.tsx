@@ -7,24 +7,21 @@ import MsgDialog from '../../components/MsgDialog';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import MsgYesNoDialog from '../../components/MsgYesNoDialog';
 import CmsMenu from '../../components/CmsMenu';
+import { useSelector } from 'react-redux';
 
 const banner = require('../../assets/fotospaginas_Mesadetrabajo1.png');
 const bgImgButton = require("../../assets/botonenviar.png");
 
 const form: any = {};
 
-const Interno = (props: any) => {
+const Interno = () => {
  
+    const globalData: any = useSelector((state: any) => state);
     const [formData, setFormData] = useState(form);
- 
     const [propietarios, setPropietarios] = useState([]);
-
     const [sHCarga, setSHCarga] = useState(false);  
-
     const [modalYesNoDialog, setModalYesNoDialog] = useState(false);  
-
     const [idToDelete, setIdToDelete] = useState(-1);
-
     const [showMsgApiResponse, setShowMsgApiResponse] = useState(false);   
     const [MsgApiResponse, setMsgApiResponse] = useState("");      
 
@@ -42,7 +39,7 @@ const Interno = (props: any) => {
         }else{
             //Creación del propietario
             const response: any = await httpApiPPPD("/propietario", "POST", {
-                "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+                "Authorization": `Bearer ${globalData.jwt}`,
                 "Content-Type" : "application/json"
             }, formData);
 
@@ -73,7 +70,7 @@ const Interno = (props: any) => {
 
         //Actualización del propietario
         const response: any = await httpApiPPPD(`/propietario/${id.idPropietario}`, "PUT", {
-            "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+            "Authorization": `Bearer ${globalData.jwt}`,
             "Content-Type" : "application/json"
         }, formData);
 
@@ -103,7 +100,7 @@ const Interno = (props: any) => {
         setSHCarga(true);
         //Creación del propietario
         const response: any = await httpApiPPPD(`/propietario/${id}`, "DELETE", {
-            "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+            "Authorization": `Bearer ${globalData.jwt}`,
             "Content-Type" : "application/json"
         }, formData);
         console.log(response);
@@ -212,28 +209,30 @@ const Interno = (props: any) => {
                 </tr>
             </thead>
             <tbody>
-                {propietarios.map((registro:any) => (
-                <tr key={registro.idPropietario}>
-                    <td>{registro.idPropietario}</td>
-                    <td>{registro.identificacion}</td>
-                    <td>{registro.nombres}</td>
-                    <td>{registro.direccion}</td>
-                    <td>{registro.telefono}</td>
-                    <td>{registro.email}</td>
-                    <td>
-                    <FaEdit
-                        onClick={() => handleLoadEdit(registro)}
-                        style={{ cursor: 'pointer', marginRight: '10px' }}
-                        className='text-warning'
-                    />
-                    <FaTrash
-                        onClick={() => handleDeleteDialog(registro.idPropietario)}
-                        style={{ cursor: 'pointer' }}
-                        className='text-danger'
-                    />
-                    </td>
-                </tr>
-                ))}
+                {
+                    propietarios.map((registro:any) => 
+                        <tr key={registro.idPropietario}>
+                            <td>{registro.idPropietario}</td>
+                            <td>{registro.identificacion}</td>
+                            <td>{registro.nombres}</td>
+                            <td>{registro.direccion}</td>
+                            <td>{registro.telefono}</td>
+                            <td>{registro.email}</td>
+                            <td>
+                            <FaEdit
+                                onClick={() => handleLoadEdit(registro)}
+                                style={{ cursor: 'pointer', marginRight: '10px' }}
+                                className='text-warning'
+                            />
+                            <FaTrash
+                                onClick={() => handleDeleteDialog(registro.idPropietario)}
+                                style={{ cursor: 'pointer' }}
+                                className='text-danger'
+                            />
+                            </td>
+                        </tr>
+                    )
+                }
             </tbody>
             </table>
 

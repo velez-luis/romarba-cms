@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CmsMantenimientoPage from './pages/CmsMantenimientoPage';
 import CmsTipoInmueblePage from './pages/CmsTipoInmueblePage';
 import CmsCaracteristicaPage from './pages/CmsCaracteristicaPage';
 import CmsCiudadPage from './pages/CmsCiudadPage';
@@ -19,7 +18,6 @@ function App() {
           <Route path="/cms/creaCiudad" element={<CmsCiudadPage />}/>                
           <Route path="/cms/creaCaracteristica" element={<CmsCaracteristicaPage />}/>       
           <Route path="/cms/creaTipoInmueble" element={<CmsTipoInmueblePage />}/>   
-          <Route path="/cms/mantenimiento" element={<CmsMantenimientoPage />}/>   
           <Route path="/landingpage" element={<LandingPage />}/>          
           <Route path="/" element={<PageLogin />}/>
         </Routes>              

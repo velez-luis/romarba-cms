@@ -7,14 +7,17 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import MsgYesNoDialog from '../../components/MsgYesNoDialog';
 import GlobalLocalMsgModalSpinner from '../../components/GlobalLocalModalSpinner/GlobalLocalMsgModalSpinner';
 import CmsMenu from '../../components/CmsMenu';
+import { useSelector } from 'react-redux';
 
 const banner = require('../../assets/fotospaginas_Mesadetrabajo1.png');
 const bgImgButton = require("../../assets/botonenviar.png");
 
 const form: any = {};
 
-const Interno = (props: any) => {
+const Interno = () => {
  
+    const globalData: any = useSelector((state: any) => state);
+    
     const [formData, setFormData] = useState(form);
     const [ciudads, setciudads] = useState([]);
     const [sHCarga, setSHCarga] = useState(false);  
@@ -37,7 +40,7 @@ const Interno = (props: any) => {
         }else{
             //Creación del ciudad
             const response: any = await httpApiPPPD("/ciudad", "POST", {
-                "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+                "Authorization": `Bearer ${globalData.jwt}`,
                 "Content-Type" : "application/json"
             }, formData);
 
@@ -68,7 +71,7 @@ const Interno = (props: any) => {
 
         //Actualización del ciudad
         const response: any = await httpApiPPPD(`/ciudad/${id.idCiudad}`, "PUT", {
-            "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+            "Authorization": `Bearer ${globalData.jwt}`,
             "Content-Type" : "application/json"
         }, formData);
 
@@ -97,7 +100,7 @@ const Interno = (props: any) => {
         setSHCarga(true);
         //Creación del ciudad
         const response: any = await httpApiPPPD(`/ciudad/${id}`, "DELETE", {
-            "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+            "Authorization": `Bearer ${globalData.jwt}`,
             "Content-Type" : "application/json"
         }, formData);
         console.log(response);

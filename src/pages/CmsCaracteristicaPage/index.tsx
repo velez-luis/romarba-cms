@@ -7,27 +7,24 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import MsgYesNoDialog from '../../components/MsgYesNoDialog';
 import GlobalLocalMsgModalSpinner from '../../components/GlobalLocalModalSpinner/GlobalLocalMsgModalSpinner';
 import CmsMenu from '../../components/CmsMenu';
+import { useSelector } from 'react-redux';
 
 const banner = require('../../assets/fotospaginas_Mesadetrabajo1.png');
 const bgImgButton = require("../../assets/botonenviar.png");
 
 const form: any = {};
 
-const Interno = (props: any) => {
+const Interno = () => {
  
+    const globalData: any = useSelector((state: any) => state);
     const [formData, setFormData] = useState(form);
- 
     const [caracteristicas, setCaracteristicas] = useState([]);
-
     const [sHCarga, setSHCarga] = useState(false);  
-
     const [modalYesNoDialog, setModalYesNoDialog] = useState(false);  
-
     const [idToDelete, setIdToDelete] = useState(-1);
-
     const [showMsgApiResponse, setShowMsgApiResponse] = useState(false);   
     const [MsgApiResponse, setMsgApiResponse] = useState("");      
-
+    
     const handler = (e: any) => {
 
         const { id, value } = e.target;
@@ -42,7 +39,7 @@ const Interno = (props: any) => {
         }else{
             //Creación del caracteristica
             const response: any = await httpApiPPPD("/caracteristica", "POST", {
-                "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+                "Authorization": `Bearer ${globalData.jwt}`,
                 "Content-Type" : "application/json"
             }, formData);
 
@@ -73,7 +70,7 @@ const Interno = (props: any) => {
 
         //Actualización del caracteristica
         const response: any = await httpApiPPPD(`/caracteristica/${id.idCaracteristica}`, "PUT", {
-            "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+            "Authorization": `Bearer ${globalData.jwt}`,
             "Content-Type" : "application/json"
         }, formData);
 
@@ -102,7 +99,7 @@ const Interno = (props: any) => {
         setSHCarga(true);
         //Creación del caracteristica
         const response: any = await httpApiPPPD(`/caracteristica/${id}`, "DELETE", {
-            "Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiIiwidXNlckRhdGEiOjEsInN1YiI6ImFkbWluIiwiaWF0IjoxNzAyMzUwMDg4LCJleHAiOjE3MDIzNjgwODh9.QHhtp8bb5ru6Gx1jUtCYZGGYRGvCUnESCjX8oPQZe-5QzxeDsnJOoX8SWR7QtyAA",
+            "Authorization": `Bearer ${globalData.jwt}`,
             "Content-Type" : "application/json"
         }, formData);
         console.log(response);
