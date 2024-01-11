@@ -18,8 +18,11 @@ const PageLandingPage = () => {
             <div className=" img-fluid  " style={{boxShadow: "1px 2px 5px"}}>
                 <img src={banner} alt="" height={365}  className="img-fluid "/>
             </div>
-            <h4>{`user: ${globalData.user}`}</h4>
-            <h4 className='text-break'>{`token:${globalData.jwt}`}</h4>
+            <br/>
+            <br/>
+            <h2>{`BIenvenido ${globalData.user}`}</h2>
+            <br/>
+            <br/>
             <div className='text-center'>
                 <BarraFooter />
             </div>             
